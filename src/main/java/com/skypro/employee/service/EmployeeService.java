@@ -39,17 +39,18 @@ public class EmployeeService {
                 sum();
     }
 
-    public OptionalInt getMinSalary() {
+    public Employee getMinSalary() {
         return employees.values().
                 stream().
-                mapToInt(e -> e.getSalary()).min();
+                min(Comparator.comparing(Employee::getSalary)).
+                get();
     }
 
-    public OptionalInt getMaxSalary() {
+    public Employee getMaxSalary() {
         return employees.values().
                 stream().
-                mapToInt(e -> e.getSalary()).
-                max();
+                max(Comparator.comparing(Employee::getSalary)).
+                get();
     }
 
     public List<Employee> getHighSalaryEmployees() {
