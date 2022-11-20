@@ -17,8 +17,8 @@ POST http://localhost:8080/employees
 Content-Type: application/json
 
 {
-"firstName": "Test1",
-"lastName": "Test1",
+"firstName": "TestTwo",
+"lastName": "TestTwo",
 "department": 1,
 "salary": 2000
 }
@@ -28,18 +28,18 @@ POST http://localhost:8080/employees
 Content-Type: application/json
 
 {
-  "firstName": "Test2",
-  "lastName": "Test2",
+  "firstName": "TestThree",
+  "lastName": "TestThree",
   "department": 2,
   "salary": 3000
 }
 
-### Создать сотрудника
+### Создать сотрудника с невалидными данными
 POST http://localhost:8080/employees
 Content-Type: application/json
 
 {
-  "firstName": "Test3",
+  "firstName": "Invaliddata3",
   "lastName": "Test3",
   "department": 2,
   "salary": 500
