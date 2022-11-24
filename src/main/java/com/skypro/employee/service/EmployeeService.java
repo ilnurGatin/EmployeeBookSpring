@@ -1,7 +1,9 @@
 package com.skypro.employee.service;
 
+import com.skypro.employee.exception.InvalidEmployeeNameCredentialsException;
 import com.skypro.employee.model.Employee;
 import com.skypro.employee.record.EmployeeRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,9 +18,12 @@ public class EmployeeService {
         if (employeeRequest.getFirstName() == null || employeeRequest.getLastName() == null) {
             throw new IllegalArgumentException("Employee should be set");
         }
+        if (!StringUtils.isAlpha(employeeRequest.getFirstName()) || !StringUtils.isAlpha(employeeRequest.getLastName())) {
+            throw new InvalidEmployeeNameCredentialsException();
+        }
         Employee employee = new Employee(
-                    employeeRequest.getFirstName(),
-                    employeeRequest.getLastName(),
+                    StringUtils.capitalize(employeeRequest.getFirstName()),
+                    StringUtils.capitalize(employeeRequest.getLastName()),
                     employeeRequest.getDepartment(),
                     employeeRequest.getSalary());
 
@@ -56,5 +61,9 @@ public class EmployeeService {
     public List<Employee> getHighSalaryEmployees() {
         int averageSalary = getSalarySum() / employees.size();
         return employees.values().stream().filter(e -> e.getSalary() > averageSalary).collect(Collectors.toList());
+    }
+
+    public Employee deleteEmployee(Integer employeeId) {
+        return employees.remove(employeeId);
     }
 }
