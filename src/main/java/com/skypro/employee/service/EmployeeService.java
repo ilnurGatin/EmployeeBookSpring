@@ -62,4 +62,8 @@ public class EmployeeService {
         int averageSalary = getSalarySum() / employees.size();
         return employees.values().stream().filter(e -> e.getSalary() > averageSalary).collect(Collectors.toList());
     }
+
+    public Employee deleteEmployee(Integer employeeId) {
+        return employees.remove(employeeId);
+    }
 }
